@@ -6,13 +6,9 @@
         <meta charset="utf-8" />
         <title>
             @section('title')
-            信雲付款
+            村里長選舉資訊平台
             @show
         </title>
-        <meta name="keywords" content="信雲國際股份有限公司,信雲,付款,線上付款" />
-        <meta name="author" content="信雲國際股份有限公司" />
-        <meta name="description" content="信雲付款是信雲國際股份有限公司為客戶設計的線上付款功能" />
-
         <!-- Mobile Specific Metas
         ================================================== -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

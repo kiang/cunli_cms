@@ -18,6 +18,7 @@
 Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
+Route::model('county', 'County');
 Route::model('role', 'Role');
 
 /** ------------------------------------------
@@ -26,6 +27,7 @@ Route::model('role', 'Role');
  */
 Route::pattern('comment', '[0-9]+');
 Route::pattern('post', '[0-9]+');
+Route::pattern('county', '[0-9]+');
 Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
@@ -51,6 +53,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::get('blogs/{post}/delete', 'AdminBlogsController@getDelete');
     Route::post('blogs/{post}/delete', 'AdminBlogsController@postDelete');
     Route::controller('blogs', 'AdminBlogsController');
+
+    # Counti Management
+    Route::get('counties/{county}/show', 'AdminCountiesController@getShow');
+    Route::get('counties/{county}/edit', 'AdminCountiesController@getEdit');
+    Route::post('counties/{county}/edit', 'AdminCountiesController@postEdit');
+    Route::get('counties/{county}/delete', 'AdminCountiesController@getDelete');
+    Route::post('counties/{county}/delete', 'AdminCountiesController@postDelete');
+    Route::controller('counties', 'AdminCountiesController');
 
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
