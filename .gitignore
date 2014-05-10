@@ -1,0 +1,25 @@
+# Laravel
+/bootstrap/compiled.php
+/bootstrap/start.php
+#/vendor
+
+# Configuration
+/app/config/local
+/app/config/staging
+/app/config/production
+
+# Basset development collections
+/public/assets/compiled
+/public/.htaccess
+
+# Composer
+composer.phar
+composer.lock
+
+# OS
+.DS_Store
+.idea/
+
+# Packages
+_ide_helpers.php
+nbproject
