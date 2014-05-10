@@ -29,6 +29,7 @@ return array(
     'CreateCommentsTable' => $baseDir . '/app/database/migrations/2013_02_05_044505_create_comments_table.php',
     'CreateCountiesTable' => $baseDir . '/app/database/migrations/2014_05_10_143107_create_counties_table.php',
     'CreatePostsTable' => $baseDir . '/app/database/migrations/2013_02_05_043505_create_posts_table.php',
+    'CreateTownsTable' => $baseDir . '/app/database/migrations/2014_05_10_151210_create_towns_table.php',
     'CssAtCharsetParserPlugin' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'CssAtCharsetToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'CssAtFontFaceDeclarationToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',

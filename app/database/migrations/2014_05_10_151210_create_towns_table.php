@@ -14,6 +14,7 @@ class CreateTownsTable extends Migration {
         Schema::create('towns', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
+            $table->integer('county_id')->unsigned();
             $table->string('title');
             $table->string('slug');
         });

@@ -19,6 +19,16 @@
     <div class="tab-content">
         <!-- General tab -->
         <div class="tab-pane active" id="tab-general">
+            <!-- Town county_id -->
+            <div class="form-group {{{ $errors->has('county_id') ? 'error' : '' }}}">
+                <div class="col-md-12">
+                    <label class="control-label" for="county_id">County</label>
+                    {{ Form::select('county_id', $counties) }}
+                    {{{ $errors->first('county_id', '<span class="help-inline">:message</span>') }}}
+                </div>
+            </div>
+            <!-- ./ town county_id -->
+
             <!-- Town Title -->
             <div class="form-group {{{ $errors->has('title') ? 'error' : '' }}}">
                 <div class="col-md-12">

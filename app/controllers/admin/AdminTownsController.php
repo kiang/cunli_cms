@@ -42,8 +42,11 @@ class AdminTownsController extends AdminController {
         // Title
         $title = Lang::get('admin/towns/title.create_a_new_town');
 
+        // Counties
+        $counties = County::lists('title', 'id');
+
         // Show the page
-        return View::make('admin/towns/create_edit', compact('title'));
+        return View::make('admin/towns/create_edit', compact('title', 'counties'));
     }
 
     /**
@@ -68,6 +71,7 @@ class AdminTownsController extends AdminController {
             // Update the town town data
             $this->town->title = Input::get('title');
             $this->town->slug = Str::slug(Input::get('title'));
+            $this->town->county_id = Input::get('county_id');
 
             // Was the town town created?
             if ($this->town->save()) {
@@ -103,8 +107,11 @@ class AdminTownsController extends AdminController {
         // Title
         $title = Lang::get('admin/towns/title.town_update');
 
+        // Counties
+        $counties = County::lists('title', 'id');
+
         // Show the page
-        return View::make('admin/towns/create_edit', compact('town', 'title'));
+        return View::make('admin/towns/create_edit', compact('town', 'title', 'counties'));
     }
 
     /**
@@ -128,6 +135,7 @@ class AdminTownsController extends AdminController {
             // Update the town town data
             $town->title = Input::get('title');
             $town->slug = Str::slug(Input::get('title'));
+            $town->county_id = Input::get('county_id');
 
             // Was the town town updated?
             if ($town->save()) {
@@ -194,7 +202,8 @@ class AdminTownsController extends AdminController {
      * @return Datatables JSON
      */
     public function getData() {
-        $towns = Town::select(array('towns.id', 'towns.title'));
+        $towns = Town::leftJoin('counties', 'counties.id', '=', 'towns.county_id')
+                ->select(array('towns.id', 'counties.title as county', 'towns.title'));
 
         return Datatables::of($towns)
                         ->add_column('actions', '<a href="{{{ URL::to(\'admin/towns/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>

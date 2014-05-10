@@ -25,6 +25,7 @@
     <thead>
         <tr>
             <th class="col-md-4">{{{ Lang::get('admin/towns/table.id') }}}</th>
+            <th class="col-md-4">{{{ Lang::get('admin/towns/table.county') }}}</th>
             <th class="col-md-4">{{{ Lang::get('admin/towns/table.title') }}}</th>
             <th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
         </tr>
