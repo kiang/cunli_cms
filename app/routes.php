@@ -20,6 +20,7 @@ Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('county', 'County');
 Route::model('town', 'Town');
+Route::model('cunli', 'Cunli');
 Route::model('role', 'Role');
 
 /** ------------------------------------------
@@ -30,6 +31,7 @@ Route::pattern('comment', '[0-9]+');
 Route::pattern('post', '[0-9]+');
 Route::pattern('county', '[0-9]+');
 Route::pattern('town', '[0-9]+');
+Route::pattern('cunli', '.+');
 Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
@@ -71,6 +73,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::get('towns/{town}/delete', 'AdminTownsController@getDelete');
     Route::post('towns/{town}/delete', 'AdminTownsController@postDelete');
     Route::controller('towns', 'AdminTownsController');
+
+    # Cunlis Management
+    Route::get('cunlis/{cunli}/show', 'AdminCunlisController@getShow');
+    Route::get('cunlis/{cunli}/edit', 'AdminCunlisController@getEdit');
+    Route::post('cunlis/{cunli}/edit', 'AdminCunlisController@postEdit');
+    Route::get('cunlis/{cunli}/delete', 'AdminCunlisController@getDelete');
+    Route::post('cunlis/{cunli}/delete', 'AdminCunlisController@postDelete');
+    Route::controller('cunlis', 'AdminCunlisController');
 
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
