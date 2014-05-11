@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdminBlogsController' => $baseDir . '/app/controllers/admin/AdminBlogsController.php',
+    'AdminCandidatesController' => $baseDir . '/app/controllers/admin/AdminCandidatesController.php',
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',
     'AdminCountiesController' => $baseDir . '/app/controllers/admin/AdminCountiesController.php',
@@ -21,6 +22,7 @@ return array(
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'BaseControllerTestCase' => $baseDir . '/app/tests/library/BaseControllerTestCase.php',
     'BlogController' => $baseDir . '/app/controllers/BlogController.php',
+    'Candidate' => $baseDir . '/app/models/Candidate.php',
     'Comment' => $baseDir . '/app/models/Comment.php',
     'CommentPresenter' => $baseDir . '/app/presenters/CommentPresenter.php',
     'CommentsTableSeeder' => $baseDir . '/app/database/seeds/CommentsTableSeeder.php',

@@ -80,6 +80,7 @@
                             <li{{ (Request::is('admin/counties*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/counties') }}}"><span class="glyphicon glyphicon-list-alt"></span> Counties</a></li>
                             <li{{ (Request::is('admin/towns*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/towns') }}}"><span class="glyphicon glyphicon-list-alt"></span> Towns</a></li>
                             <li{{ (Request::is('admin/cunlis*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/cunlis') }}}"><span class="glyphicon glyphicon-list-alt"></span> Cunlis</a></li>
+                            <li{{ (Request::is('admin/candidates*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/candidates') }}}"><span class="glyphicon glyphicon-list-alt"></span> Candidates</a></li>
                             <li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-list-alt"></span> Blog</a></li>
                             <li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Comments</a></li>
                             <li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}">

@@ -20,6 +20,7 @@ Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('county', 'County');
 Route::model('town', 'Town');
+Route::model('candidate', 'Candidate');
 Route::model('cunli', 'Cunli');
 Route::model('role', 'Role');
 
@@ -32,6 +33,7 @@ Route::pattern('post', '[0-9]+');
 Route::pattern('county', '[0-9]+');
 Route::pattern('town', '[0-9]+');
 Route::pattern('cunli', '.+');
+Route::pattern('candidate', '.+');
 Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
@@ -81,6 +83,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
     Route::get('cunlis/{cunli}/delete', 'AdminCunlisController@getDelete');
     Route::post('cunlis/{cunli}/delete', 'AdminCunlisController@postDelete');
     Route::controller('cunlis', 'AdminCunlisController');
+
+    # Candidates Management
+    Route::get('candidates/{candidate}/show', 'AdminCandidatesController@getShow');
+    Route::get('candidates/{candidate}/edit', 'AdminCandidatesController@getEdit');
+    Route::post('candidates/{candidate}/edit', 'AdminCandidatesController@postEdit');
+    Route::get('candidates/{candidate}/delete', 'AdminCandidatesController@getDelete');
+    Route::post('candidates/{candidate}/delete', 'AdminCandidatesController@postDelete');
+    Route::controller('candidates', 'AdminCandidatesController');
 
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');

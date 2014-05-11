@@ -143,7 +143,7 @@ class AdminCunlisController extends AdminController {
             $cunli->id = Input::get('id');
             $cunli->title = Input::get('title');
             $cunli->county_id = Input::get('county_id');
-            $this->cunli->town_id = Input::get('town_id');
+            $cunli->town_id = Input::get('town_id');
 
             // Was the cunli updated?
             if ($cunli->save()) {
