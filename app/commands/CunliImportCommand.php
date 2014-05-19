@@ -58,12 +58,14 @@ class CunliImportCommand extends Command {
                 $d->save();
             }
 
+            $skippedList = array();
             foreach ($listInfo['county2towns'] AS $countyId => $townIds) {
                 foreach ($townIds AS $townId) {
                     $townJson = json_decode(file_get_contents($path . '/' . $countyId . '_' . $townId . '.json'), true);
                     foreach ($townJson['objects']['layer1']['geometries'] AS $cunli) {
                         if (empty($cunli['properties']['V_ID'])) {
                             if (empty($cunli['properties']['VILLAGE_ID'])) {
+                                $skippedList[] = $cunli;
                                 continue;
                             }
                             $cunli['properties']['V_ID'] = $townId . '-' . $cunli['properties']['VILLAGE_ID'];
@@ -80,6 +82,8 @@ class CunliImportCommand extends Command {
                     }
                 }
             }
+            
+            file_put_contents('skipped.json', json_encode($skippedList));
         } else {
             $this->error('list.json does not exist');
         }
