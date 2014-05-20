@@ -14,6 +14,11 @@
                 <option value="0">鄉鎮市區</option>
             </select>
         </div>
+        <div class="form-group col-lg-2">
+            <select class="form-control select-cunli" name="cunli">
+                <option value="0">村里</option>
+            </select>
+        </div>
     </div>
 </form>
 <div id="map_canvas" style="width:100%; height:600px"></div>
@@ -56,6 +61,11 @@
             countySelect.trigger('change');
         });
 
+        $('select.select-cunli').change(function() {
+            var vid = $(this).val();
+            google.maps.event.trigger(overlays[vid], 'click');
+        });
+
         $('select.select-town').change(function() {
             var selectedCountyId = $('select.select-county').val();
             var selectedTownId = $(this).val();
@@ -63,6 +73,8 @@
                 $.getJSON('json/' + selectedCountyId + '_' + selectedTownId + '.json', function(data) {
                     var cunli_geojson = topojson.feature(data, data.objects.layer1).features;
                     var bounds = new google.maps.LatLngBounds;
+                    var cunliSelect = $('select.select-cunli');
+                    cunliSelect.html('');
 
                     var style = {
                         strokeColor: "#0000FF",
@@ -78,7 +90,7 @@
                     overlays = [];
 
                     var pushPolygon = function(cunliPoint, k) {
-                        var i = cunliPoint.latLngs.getArray();
+                        $('<option>').val(cunli_geojson[k].properties.V_ID).html(cunli_geojson[k].properties.VILLAGE).appendTo(cunliSelect);
 
                         var gCenter = new google.maps.LatLng(cunli_geojson[k].properties.Y, cunli_geojson[k].properties.X);
 
@@ -119,6 +131,8 @@
                                 fillOpacity: 0.6
                             });
 
+                            cunliSelect.val(this.geojsonProperties.V_ID);
+
                             latLngs[0].forEach(function(p) {
                                 newBounds.extend(p);
                             });
@@ -128,7 +142,7 @@
 
                         bounds.extend(gCenter);
                         cunliPoint.setMap(map);
-                        overlays.push(cunliPoint);
+                        overlays[cunli_geojson[k].properties.V_ID] = cunliPoint;
                     }
 
                     $.each(cunli_geojson, function(k, v) {
