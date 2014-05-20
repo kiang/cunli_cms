@@ -52,7 +52,8 @@
                     </div>
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav">
-                            <li {{ (Request::is('/') ? ' class="active"' : '') }}>信雲付款</li>
+                            <li {{ (Request::is('/') ? ' class="active"' : '') }}><a href="{{{ URL::to('/') }}}">首頁</a></li>
+                            <li {{ (Request::is('blog') ? ' class="active"' : '') }}><a href="{{{ URL::to('blog') }}}">Blog</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav pull-right">
@@ -103,6 +104,11 @@
 
         <!-- Javascripts
         ================================================== -->
+        <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js"></script>
         {{ Basset::show('public.js') }}
+        <!-- page-script -->
+        @yield('page-script')
+        <!-- ./ page-script -->
     </body>
 </html>

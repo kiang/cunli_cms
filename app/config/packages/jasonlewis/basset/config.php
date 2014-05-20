@@ -40,6 +40,8 @@ return array(
                 $collection->add('jquery.min.js');
                 $collection->add('bootstrap/bootstrap.js');
                 $collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
+                $collection->add('GeoJSON.js');
+                $collection->add('topojson.js');
             })->apply('JsMin');
         },
 
