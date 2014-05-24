@@ -98,7 +98,7 @@
 
         <div id="footer">
             <div class="container">
-                <p class="muted credit"><a href="http://syi.tw/" target="_blank">信雲國際股份有限公司</a> 建置</p>
+                <p class="muted credit"><a href="http://k.olc.tw/" target="_blank">江明宗</a> 建置</p>
             </div>
         </div>
 
