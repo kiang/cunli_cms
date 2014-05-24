@@ -32,7 +32,6 @@ return array(
     'Stack' => array($vendorDir . '/stack/builder/src'),
     'Robbo\\Presenter' => array($vendorDir . '/robclancy/presenter/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
-    'Profiler' => array($vendorDir . '/loic-sharma/profiler/src'),
     'Predis' => array($vendorDir . '/predis/predis/lib'),
     'Patchwork' => array($vendorDir . '/patchwork/utf8/class'),
     'PHPParser' => array($vendorDir . '/nikic/php-parser/lib'),
@@ -52,6 +51,7 @@ return array(
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib'),
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
+    'DebugBar' => array($vendorDir . '/maximebf/debugbar/src'),
     'Crypt' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ClassPreloader' => array($vendorDir . '/classpreloader/classpreloader/src'),
     'Carbon' => array($vendorDir . '/nesbot/carbon/src'),
@@ -59,5 +59,6 @@ return array(
     'Bllim\\Datatables' => array($vendorDir . '/bllim/datatables/src'),
     'Basset' => array($vendorDir . '/jasonlewis/basset/src'),
     'Barryvdh\\LaravelIdeHelper' => array($vendorDir . '/barryvdh/laravel-ide-helper/src'),
+    'Barryvdh\\Debugbar' => array($vendorDir . '/barryvdh/laravel-debugbar/src'),
     'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
 );

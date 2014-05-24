@@ -6,6 +6,9 @@ class CandidatesController extends BaseController {
      */
 
     public function getCount($townId = '') {
+        $hi = Candidate::select(array('cunli_id', 'COUNT(*) AS count'))->where('town_id', '=', $townId)->groupBy('cunli_id');
+
+        return 'hi';
         return Response::json(array(
                     'counters' => Candidate::select(array('cunli_id', 'COUNT(*) AS count'))->where('town_id', '=', $townId)->groupBy('cunli_id'),
         ));
