@@ -19,6 +19,7 @@
                 <option value="0">村里</option>
             </select>
         </div>
+        <div class="col-lg-4"><a class="btn btn-primary">目前有 x 人登記參選</a> <a class="btn btn-primary">立刻登記一個</a></div>
     </div>
 </form>
 <div id="map_canvas" style="width:100%; height:600px"></div>
