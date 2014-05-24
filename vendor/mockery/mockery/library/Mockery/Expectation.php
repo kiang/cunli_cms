@@ -288,7 +288,11 @@ class Expectation
             return true;
         }
         if (is_string($expected) && !is_array($actual) && !is_object($actual)) {
-            $result = @preg_match($expected, (string) $actual);
+            # push/pop an error handler here to to make sure no error/exception thrown if $expected is not a regex
+            set_error_handler(function() {});
+            $result = preg_match($expected, (string) $actual);
+            restore_error_handler();
+
             if($result) {
                 return true;
             }
@@ -370,6 +374,16 @@ class Expectation
     }
 
     /**
+     * Return this mock, like a fluent interface
+     *
+     * @return self
+     */
+    public function andReturnSelf()
+    {
+        return $this->andReturn($this->_mock);
+    }
+
+    /**
      * Set a sequential queue of return values with an array
      *
      * @return self
@@ -432,6 +446,23 @@ class Expectation
             $this->andReturn(new $exception($message, $code, $previous));
         }
         return $this;
+    }
+
+    /**
+     * Set Exception classes to be thrown
+     *
+     * @param array $exceptions
+     * @return self
+     */
+    public function andThrowExceptions(array $exceptions)
+    {
+        $this->_throw = true;
+        foreach ($exceptions as $exception) {
+            if (!is_object($exception)) {
+                throw new Exception('You must pass an array of exception objects to andThrowExceptions');
+            }
+        }
+        return $this->andReturnValues($exceptions);
     }
 
     /**

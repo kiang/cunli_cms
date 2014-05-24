@@ -40,6 +40,8 @@ class Datatables
 
     protected $mDataSupport;
 
+	protected $index_column;
+
 
     /**
      * Gets query and returns instance of class
@@ -58,7 +60,7 @@ class Datatables
      *
      * @return null
      */
-    public function make($mDataSupport=false)
+    public function make($mDataSupport=false,$raw=false)
     {
         $this->mDataSupport = $mDataSupport;
         $this->create_last_columns();
@@ -67,7 +69,7 @@ class Datatables
         $this->init_columns();
         $this->regulate_array();
 
-        return $this->output();
+        return $this->output($raw);
     }
 
     /**
@@ -142,6 +144,17 @@ class Datatables
         return $this;
     }
 
+	/**
+	 * Sets the DataTables index column (as used to set, e.g., id of the <tr> tags) to the named column
+	 *
+	 * @param $name
+	 * @return $this
+	 */
+	public function set_index_column($name) {
+		$this->index_column = $name;
+		return $this;
+	}
+
     /**
      * Saves given query and determines its type
      *
@@ -203,7 +216,14 @@ class Datatables
                     unset($value[$evalue]);
                 }
 
-                $this->result_array_r[] = array_values($value);
+	            $row = array_values($value);
+	            if ($this->index_column) {
+		            if (!array_key_exists($this->index_column, $value)) {
+			            throw new \Exception('Index column set to non-existent column "' . $this->index_column . '"');
+		            }
+		            $row['DT_RowId'] = $value[$this->index_column];
+	            }
+                $this->result_array_r[] = $row;
             }
         }
     }
@@ -471,14 +491,31 @@ class Datatables
      * @param string $count variable to store to 'count_all' for iTotalRecords, 'display_all' for iTotalDisplayRecords
      * @return null
      */
-    private function count($count = 'count_all')
-    {
-        //Get columns to temp var.
-        $query = $this->query_type == 'eloquent' ? $this->query->getQuery() : $this->query;
-        //Count the number of rows in the select
-        $this->$count = DB::table(DB::raw('('.$query->toSql().') AS count_row_table'))
-        ->setBindings($query->getBindings())->count();
-    }
+     private function count($count  = 'count_all')
+     {   
+
+		//Get columns to temp var.
+        if($this->query_type == 'eloquent') {
+            $query = $this->query->getQuery();
+            $connection = $this->query->getModel()->getConnection()->getName();
+        }
+        else {
+            $query = $this->query;
+            $connection = $query->getConnection()->getName();
+        }
+
+        // if its a normal query ( no union ) replace the slect with static text to improve performance
+        $myQuery = clone $query;
+        if( !preg_match( '/UNION/i', $myQuery->toSql() ) ){
+        	$myQuery->select( DB::Raw("'1' as row") );	        	
+        }
+
+
+        $this->$count = DB::connection($connection)
+        ->table(DB::raw('('.$myQuery->toSql().') AS count_row_table'))
+        ->setBindings($myQuery->getBindings())->remember(1)->count();
+
+     }
 
     /**
      * Returns column name from <table>.<column>
@@ -508,7 +545,7 @@ class Datatables
      *
      * @return null
      */
-    private function output()
+    private function output($raw=false)
     {
         $sColumns = array_merge_recursive($this->columns,$this->sColumns);
 
@@ -523,6 +560,11 @@ class Datatables
         if(Config::get('app.debug', false)) {
             $output['aQueries'] = DB::getQueryLog();
         }
-        return Response::json($output);
+        if($raw) {
+            return $output;
+        }
+        else {
+            return Response::json($output);
+        }
     }
 }

@@ -203,6 +203,14 @@ class Container
         $this->checkForNamedMockClashes($config);
 
         $def = $this->getGenerator()->generate($config);
+
+        if (class_exists($def->getClassName(), $attemptAutoload = false)) {
+            $rfc = new \ReflectionClass($def->getClassName());
+            if (!$rfc->implementsInterface("Mockery\MockInterface")) {
+                throw new \Mockery\Exception\RuntimeException("Could not load mock {$def->getClassName()}, class already exists");
+            }
+        }
+
         $this->getLoader()->load($def);
 
         $mock = $this->_getInstance($def->getClassName(), $constructorArgs);
