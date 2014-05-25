@@ -66,9 +66,10 @@
 
         $('select.select-cunli').change(function() {
             var vid = $(this).val();
-            google.maps.event.trigger(overlays[vid], 'click');
+            google.maps.event.trigger(overlays[vid], 'click', {});
             currentCunliId = vid;
             $('a.btn-signup').attr('href', signupBaseUrl + '/' + currentCunliId);
+
         });
 
         $('select.select-town').change(function() {
@@ -148,10 +149,7 @@
                         bounds.extend(gCenter);
                         cunliPoint.setMap(map);
                         overlays[cunli_geojson[k].properties.V_ID] = cunliPoint;
-                        
-                        setTimeout(function() {
-                            cunliSelect.trigger('change');
-                        }, 1000);
+
                     }
 
                     $.each(cunli_geojson, function(k, v) {
@@ -165,11 +163,14 @@
                             }
                         }
                     });
-                    map.setCenter(bounds.getCenter());
+
+                    setTimeout(function() {
+                        cunliSelect.trigger('change');
+                    }, 1000);
                 });
             }
         });
-        
+
         $('a.iframe').colorbox({iframe: true, width: "80%", height: "80%"});
 
     });
