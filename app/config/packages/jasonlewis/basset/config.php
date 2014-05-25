@@ -33,6 +33,7 @@ return array(
             $collection->directory('assets/css', function($collection)
             {
                 $collection->add('less/master.less')->apply('Less');
+                $collection->add('colorbox.css');
             })->apply('UriRewriteFilter')->apply('CssMin');
 
             $collection->directory('assets/js', function($collection)
@@ -40,6 +41,7 @@ return array(
                 $collection->add('jquery.min.js');
                 $collection->add('bootstrap/bootstrap.js');
                 $collection->requireDirectory('../../../vendor/twbs/bootstrap/js');
+                $collection->add('jquery.colorbox.js');
                 $collection->add('GeoJSON.js');
                 $collection->add('topojson.js');
             })->apply('JsMin');

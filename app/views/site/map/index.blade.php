@@ -19,7 +19,7 @@
                 <option value="0">村里</option>
             </select>
         </div>
-        <div class="col-lg-4"><a class="btn btn-primary">目前有 x 人登記參選</a> <a class="btn btn-primary">立刻登記一個</a></div>
+        <div class="col-lg-4"><a class="btn btn-primary">目前有 x 人登記參選</a> <a class="btn btn-primary btn-signup iframe" hrebf="#">立刻登記一個</a></div>
     </div>
 </form>
 <div id="map_canvas" style="width:100%; height:600px"></div>
@@ -39,6 +39,8 @@
         var listInfo = [];
         var overlays = [];
         var lastPolygon = {};
+        var currentCunliId = '';
+        var signupBaseUrl = "{{{ URL::to('candidates/new') }}}";
 
         $.getJSON('json/list.json', function(data) {
             listInfo = data;
@@ -65,6 +67,8 @@
         $('select.select-cunli').change(function() {
             var vid = $(this).val();
             google.maps.event.trigger(overlays[vid], 'click');
+            currentCunliId = vid;
+            $('a.btn-signup').attr('href', signupBaseUrl + '/' + currentCunliId);
         });
 
         $('select.select-town').change(function() {
@@ -144,6 +148,8 @@
                         bounds.extend(gCenter);
                         cunliPoint.setMap(map);
                         overlays[cunli_geojson[k].properties.V_ID] = cunliPoint;
+                        
+                        cunliSelect.trigger('change');
                     }
 
                     $.each(cunli_geojson, function(k, v) {
@@ -161,6 +167,8 @@
                 });
             }
         });
+        
+        $('a.iframe').colorbox({iframe: true, width: "80%", height: "80%"});
 
     });
 </script>
