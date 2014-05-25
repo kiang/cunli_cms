@@ -149,7 +149,9 @@
                         cunliPoint.setMap(map);
                         overlays[cunli_geojson[k].properties.V_ID] = cunliPoint;
                         
-                        cunliSelect.trigger('change');
+                        setTimeout(function() {
+                            cunliSelect.trigger('change');
+                        }, 1000);
                     }
 
                     $.each(cunli_geojson, function(k, v) {
