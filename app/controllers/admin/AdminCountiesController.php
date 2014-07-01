@@ -197,8 +197,9 @@ class AdminCountiesController extends AdminController {
         $counties = County::select(array('counties.id', 'counties.title'));
 
         return Datatables::of($counties)
-                        ->add_column('actions', '<a href="{{{ URL::to(\'admin/counties/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/counties/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+                        ->add_column('actions', '<a href="{{{ URL::to(\'admin/counties/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >編輯</a>
+                <a href="{{{ URL::to(\'admin/towns/create/\' . $id ) }}}" class="btn btn-default btn-xs iframe" >新增鄉鎮市區</a>
+                <a href="{{{ URL::to(\'admin/counties/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">刪除</a>
             ')
                         ->make();
     }

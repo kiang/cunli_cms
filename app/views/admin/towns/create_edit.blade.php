@@ -10,7 +10,7 @@
 <!-- ./ tabs -->
 
 {{-- Edit Town Form --}}
-<form class="form-horizontal" method="post" action="@if (isset($town)){{ URL::to('admin/towns/' . $town->id . '/edit') }}@endif" autocomplete="off">
+<form class="form-horizontal" method="post" action="@if (isset($town)){{ URL::to('admin/towns/' . $town->id . '/edit') }} @else {{ URL::to('admin/counties/create/' . $countyId) }} @endif" autocomplete="off">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
     <!-- ./ csrf token -->

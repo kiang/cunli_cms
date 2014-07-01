@@ -13,10 +13,10 @@
 @section('content')
 <div class="page-header">
     <h3>
-        {{{ $title }}}
+        縣市管理
 
         <div class="pull-right">
-            <a href="{{{ URL::to('admin/counties/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+            <a href="{{{ URL::to('admin/counties/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> 新增</a>
         </div>
     </h3>
 </div>
@@ -24,9 +24,9 @@
 <table id="counties" class="table table-striped table-hover">
     <thead>
         <tr>
-            <th class="col-md-4">{{{ Lang::get('admin/counties/table.id') }}}</th>
-            <th class="col-md-4">{{{ Lang::get('admin/counties/table.title') }}}</th>
-            <th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
+            <th class="col-md-4">編號</th>
+            <th class="col-md-4">縣市</th>
+            <th class="col-md-2">操作</th>
         </tr>
     </thead>
     <tbody>

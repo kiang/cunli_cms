@@ -215,8 +215,8 @@ class AdminCunlisController extends AdminController {
                 ->select(array('cunlis.id', 'counties.title as county', 'towns.title as town', 'cunlis.title'));
 
         return Datatables::of($cunlis)
-                        ->add_column('actions', '<a href="{{{ URL::to(\'admin/cunlis/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/cunlis/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+                        ->add_column('actions', '<a href="{{{ URL::to(\'admin/cunlis/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >編輯</a>
+                <a href="{{{ URL::to(\'admin/cunlis/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">刪除</a>
             ')
                         ->make();
     }

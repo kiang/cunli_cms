@@ -13,21 +13,17 @@
 @section('content')
 <div class="page-header">
     <h3>
-        {{{ $title }}}
-
-        <div class="pull-right">
-            <a href="{{{ URL::to('admin/towns/create') }}}" class="btn btn-small btn-info iframe"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
-        </div>
+        鄉鎮市區
     </h3>
 </div>
 
 <table id="towns" class="table table-striped table-hover">
     <thead>
         <tr>
-            <th class="col-md-4">{{{ Lang::get('admin/towns/table.id') }}}</th>
-            <th class="col-md-4">{{{ Lang::get('admin/towns/table.county') }}}</th>
-            <th class="col-md-4">{{{ Lang::get('admin/towns/table.title') }}}</th>
-            <th class="col-md-2">{{{ Lang::get('table.actions') }}}</th>
+            <th class="col-md-2">編號</th>
+            <th class="col-md-2">縣市</th>
+            <th class="col-md-3">鄉鎮市區</th>
+            <th class="col-md-2">操作</th>
         </tr>
     </thead>
     <tbody>

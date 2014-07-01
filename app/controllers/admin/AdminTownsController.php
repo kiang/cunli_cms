@@ -38,7 +38,7 @@ class AdminTownsController extends AdminController {
      *
      * @return Response
      */
-    public function getCreate() {
+    public function getCreate($countyId = '') {
         // Title
         $title = Lang::get('admin/towns/title.create_a_new_town');
 
@@ -46,7 +46,7 @@ class AdminTownsController extends AdminController {
         $counties = County::lists('title', 'id');
 
         // Show the page
-        return View::make('admin/towns/create_edit', compact('title', 'counties'));
+        return View::make('admin/towns/create_edit', compact('title', 'counties', 'countyId'));
     }
 
     /**
@@ -206,8 +206,9 @@ class AdminTownsController extends AdminController {
                 ->select(array('towns.id', 'counties.title as county', 'towns.title'));
 
         return Datatables::of($towns)
-                        ->add_column('actions', '<a href="{{{ URL::to(\'admin/towns/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/towns/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+                        ->add_column('actions', '<a href="{{{ URL::to(\'admin/towns/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >編輯</a>
+                <a href="{{{ URL::to(\'admin/cunlis/create/\' . $id ) }}}" class="btn btn-default btn-xs iframe" >新增村里</a>
+                <a href="{{{ URL::to(\'admin/towns/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">刪除</a>
             ')
                         ->make();
     }
